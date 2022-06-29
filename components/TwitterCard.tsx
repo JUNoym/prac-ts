@@ -18,34 +18,29 @@ type Analytics = {
 
 type Path = [string, string, string]
 
-
-type TweetProps = {
-    type: "tweet"
+type CommonTypes = {
     user: User
     body: Body
     analytics: Analytics
     path: Path
+}
+
+
+type TweetProps = {
+    type: "tweet"
 }
 
 type RetweetProps = {
     type: "retweet"
     retweetedUser: string
-    user: User
-    body: Body
-    analytics: Analytics
-    path: Path
 
 }
 
 type PromotionProps = {
     type: "promotion"
-    user: User
-    body: Body
-    analytics: Analytics
-    path: Path
 }
 
-type TwitterCardProps = TweetProps | RetweetProps | PromotionProps
+type TwitterCardProps = CommonTypes & (TweetProps | RetweetProps | PromotionProps)
 
 export const TwitterCard = (props: TwitterCardProps) => {
     return (
