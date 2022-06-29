@@ -12,6 +12,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <TwitterCard
+        type='promotion'
         user={
           { name: "知性なしこ", accountName: "kamepoll", image: "https://pbs.twimg.com/profile_images/1049797231723741186/exCULU5H_400x400.jpg" }
         }

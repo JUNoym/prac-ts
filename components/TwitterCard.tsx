@@ -20,6 +20,7 @@ type Path = [string, string, string]
 
 
 type TweetProps = {
+    type: "tweet"
     user: User
     body: Body
     analytics: Analytics
@@ -27,6 +28,8 @@ type TweetProps = {
 }
 
 type RetweetProps = {
+    type: "retweet"
+    retweetedUser: string
     user: User
     body: Body
     analytics: Analytics
@@ -35,13 +38,16 @@ type RetweetProps = {
 }
 
 type PromotionProps = {
+    type: "promotion"
     user: User
     body: Body
     analytics: Analytics
     path: Path
-
 }
-export const TwitterCard = (props: TweetProps) => {
+
+type TwitterCardProps = TweetProps | RetweetProps | PromotionProps
+
+export const TwitterCard = (props: TwitterCardProps) => {
     return (
         (
             <div className="bg-gray-200 pt-20 pb-80 flex items-center justify-center">
@@ -53,11 +59,16 @@ export const TwitterCard = (props: TweetProps) => {
                             alt=""
                             src={props.user.image}
                         />
+
                         <div className="ml-1.5 text-sm leading-tight">
                             <span className="text-black font-bold block ">
+                                {props.type === "promotion" ? "プロモーション広告" : null}
+                                {props.type === "tweet" ? "通常ツイート" : null}
+                                {props.type === "retweet" ? "リツイート" : null}
                                 <p>{props.user.name}</p>
                             </span>
                             <span className="text-gray-500 font-normal block">{`@${props.user.accountName}`}</span>
+
                         </div>
                     </div>
 
